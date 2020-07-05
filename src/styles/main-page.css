@@ -1,0 +1,28 @@
+#components-layout-demo-top-side-2 .logo {
+    width: 120px;
+    height: 31px;
+    background: rgba(255, 255, 255, 0.2);
+    margin: 16px 28px 16px 0;
+    float: left;
+}
+  
+.site-layout-background {
+    background: #fff;
+}
+
+.ant-layout-header {
+   padding: 0px;
+/* padding: 0 190px; */
+}
+
+.ant-menu-item.menuItem2.ant-menu-item-only-child {
+   margin-left: 50px;
+}
+.ant-menu-item.menuItem1.ant-menu-item-only-child{
+    margin-left: 20px;
+
+}
+.menu-header-logo-img{
+    width: 80px;
+    height: 50px;
+}
