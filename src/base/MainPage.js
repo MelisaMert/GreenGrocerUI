@@ -29,7 +29,7 @@ export default class MainPage extends React.Component {
      
       <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']}>
         <Menu.Item className="menuItem1" key="1">
-            <img className="menu-header-logo-img" src="https://thumbs.dreamstime.com/b/greengrocery-vector-line-icon-section-badge-signboard-banner-72483550.jpg"/>
+            {/* <img className="menu-header-logo-img" src="https://thumbs.dreamstime.com/b/greengrocery-vector-line-icon-section-badge-signboard-banner-72483550.jpg"/> */}
             {/* GreenGrocer */}
         </Menu.Item>
         <Menu.Item className="menuItem2" key="2">Products</Menu.Item>

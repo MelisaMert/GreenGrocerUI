@@ -16,13 +16,35 @@
 }
 
 .ant-menu-item.menuItem2.ant-menu-item-only-child {
-   margin-left: 50px;
+
 }
 .ant-menu-item.menuItem1.ant-menu-item-only-child{
-    margin-left: 20px;
+    /* margin-left: 20px; */
 
 }
 .menu-header-logo-img{
     width: 80px;
     height: 50px;
+}
+.ant-menu.ant-menu-dark .ant-menu-item-selected {
+    background-color: seagreen;
+}
+.ant-menu-submenu-selected {
+   color: seagreen;
+}
+.ant-menu-inline .ant-menu-item-selected::after {
+    border-right-color: seagreen;
+}
+.ant-menu-item .ant-menu-item-only-child .ant-menu-item-selected {
+    color: seagreen;
+    background-color: aquamarine;
+}
+.ant-menu-item .ant-menu-item-only-child .ant-menu-item-active {
+    color: tomato;
+}
+.ant-menu-item-selected {
+    color: seagreen
+}
+.ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
+background-color: whitesmoke;
 }
