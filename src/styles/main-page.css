@@ -26,3 +26,40 @@
     width: 80px;
     height: 50px;
 }
+.ant-layout-header .ant-menu{
+    margin-left: 180px;
+}
+.ant-menu.ant-menu-dark .ant-menu-item-selected {
+    background-color : mediumseagreen ;
+}
+.ant-menu-submenu-popup.ant-menu-dark .ant-menu-item-selected {
+    background-color : mediumseagreen ;
+}
+/* .ant-menu-submenu .ant-menu-submenu-inline .ant-menu-submenu-active {
+    color: mediumseagreen;
+} */
+.ant-menu-submenu-selected  {
+    color: mediumseagreen;
+}
+.ant-menu-item .ant-menu-item-only-child .ant-menu-item-selected {
+    color: mediumseagreen;
+}
+.ant-menu-item .ant-menu-item-only-child .ant-menu-item-selected {
+    color: mediumseagreen;
+}
+.ant-menu-item .ant-menu-item-only-child .ant-menu-item-active{
+    color: mediumseagreen;
+}
+.ant-menu-item-selected {
+    color: seagreen;
+}
+.ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected{
+   background-color: lightgrey;
+}
+.ant-menu-inline .ant-menu-item-selected::after {
+    border-right: solid;
+}
+.ant-menu-item .customer .ant-menu-item-only-child {
+    float: right;
+    margin-right: 20px;
+}

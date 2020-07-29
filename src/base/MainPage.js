@@ -2,16 +2,15 @@
 import React from 'react';
 import 'antd/dist/antd.css'
 import '../styles/main-page.css';
-import { Layout, Menu, Breadcrumb,Row,Col,Card } from 'antd';
+import { Layout, Menu, Breadcrumb,Row,Col,Card, Tooltip } from 'antd';
 import { UserOutlined, LaptopOutlined, NotificationOutlined,ShoppingCartOutlined ,StockOutlined } from '@ant-design/icons';
+import { Line } from '@ant-design/charts';
+import { Switch, Router } from 'react-router'
+import { Products } from './Products';
+
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
 
-const gridStyle = {
-    width: '25%',
-    textAlign: 'center',
-  };
-  
 export default class MainPage extends React.Component {
  state= {
    collapsed: false
@@ -20,22 +19,42 @@ export default class MainPage extends React.Component {
     console.log(collapsed);
     this.setState({ collapsed });
   };
- 
  render() {
+  const data = [
+    { year: '1991', value: 3 },
+    { year: '1992', value: 4 },
+    { year: '1993', value: 3.5 },
+    { year: '1994', value: 5 },
+    { year: '1995', value: 4.9 },
+    { year: '1996', value: 6 },
+    { year: '1997', value: 7 },
+    { year: '1998', value: 9 },
+    { year: '1999', value: 13 },
+  ];
+  const config = {
+    data,
+    title: {
+      visible: true,
+      text: 'Green Grocer',
+    },
+    xField: 'year',
+    yField: 'value',
+  };
  return (
-<Layout>
+  <Layout>
     <Header className="header">
       <div className="logo" />
-     
       <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']}>
-        <Menu.Item className="menuItem1" key="1">
-            <img className="menu-header-logo-img" src="https://thumbs.dreamstime.com/b/greengrocery-vector-line-icon-section-badge-signboard-banner-72483550.jpg"/>
-            {/* GreenGrocer */}
+        <Menu.Item key="1">
+          Products
         </Menu.Item>
-        <Menu.Item className="menuItem2" key="2">Products</Menu.Item>
-        <Menu.Item className="menuItem3" key="3">Categories</Menu.Item>
-        <Menu.Item className="menuItem4" key="4">Stocks</Menu.Item>
-        <Menu.Item className="menuItem5" key="5">Customers</Menu.Item>
+        <Menu.Item key="2">
+          Categories
+        </Menu.Item>
+        <Menu.Item key="3" 
+        className="customer">
+          Customers
+        </Menu.Item>
       </Menu>
     </Header>
     <Layout>
@@ -53,64 +72,39 @@ export default class MainPage extends React.Component {
             <Menu.Item key="4">Fruits - 4</Menu.Item>
           </SubMenu>
           <SubMenu key="sub2" icon={<ShoppingCartOutlined />} title="Vegetables">
-            <Menu.Item key="5">Vegetables - 2</Menu.Item>
-            <Menu.Item key="6">Vegetables - 2</Menu.Item>
-            <Menu.Item key="7">Vegetables - 2</Menu.Item>
-            <Menu.Item key="8">Vegetables - 2</Menu.Item>
+            <Menu.Item key="5">Vegetables - 1</Menu.Item>
+            <Menu.Item key="6">Vegatables - 2</Menu.Item>
+            <Menu.Item key="7">Vegatables - 3</Menu.Item>
+            <Menu.Item key="8">Vegatables - 4</Menu.Item>
           </SubMenu>
           <SubMenu key="sub3" icon={<StockOutlined />} title="Stocks">
-            <Menu.Item key="9">Stock - 1</Menu.Item>
-            <Menu.Item key="10">Stock - 1</Menu.Item>
-            <Menu.Item key="11">Stock - 1</Menu.Item>
-            <Menu.Item key="12">Stock - 1</Menu.Item>
+            <Menu.Item key="9">Stocks - 1</Menu.Item>
+            <Menu.Item key="10">Stocks - 2</Menu.Item>
+            <Menu.Item key="11">Stocks - 3</Menu.Item>
+            <Menu.Item key="12">Stocks - 4</Menu.Item>
           </SubMenu>
         </Menu>
       </Sider>
       <Layout style={{ padding: '0 24px 24px' }}>
         <Breadcrumb style={{ margin: '16px 0' }}>
-          <Breadcrumb.Item>Home</Breadcrumb.Item>
+          {/* <Breadcrumb.Item>Home</Breadcrumb.Item>
           <Breadcrumb.Item>List</Breadcrumb.Item>
-          <Breadcrumb.Item>App</Breadcrumb.Item>
+          <Breadcrumb.Item>App</Breadcrumb.Item> */}
         </Breadcrumb>
-        <Content>
-       <Card title="Fruits">
-       <Card.Grid style={gridStyle}>Content</Card.Grid>
-       <Card.Grid hoverable={false} style={gridStyle}>
-         Content
-       </Card.Grid>
-       <Card.Grid style={gridStyle}>Content</Card.Grid>
-       <Card.Grid style={gridStyle}>Content</Card.Grid>
-       <Card.Grid style={gridStyle}>Content</Card.Grid>
-       <Card.Grid style={gridStyle}>Content</Card.Grid>
-       <Card.Grid style={gridStyle}>Content</Card.Grid>
-       <Card.Grid style={gridStyle}>Content</Card.Grid>
-       <Card.Grid style={gridStyle}>Content</Card.Grid>
-       <Card.Grid style={gridStyle}>Content</Card.Grid>
-       <Card.Grid style={gridStyle}>Content</Card.Grid>
-       <Card.Grid style={gridStyle}>Content</Card.Grid>
-
-     </Card>
-     <Card title="Vagatables">
-       <Card.Grid style={gridStyle}>Content</Card.Grid>
-       <Card.Grid hoverable={false} style={gridStyle}>
-         Content
-       </Card.Grid>
-       <Card.Grid style={gridStyle}>Content</Card.Grid>
-       <Card.Grid style={gridStyle}>Content</Card.Grid>
-       <Card.Grid style={gridStyle}>Content</Card.Grid>
-       <Card.Grid style={gridStyle}>Content</Card.Grid>
-       <Card.Grid style={gridStyle}>Content</Card.Grid>
-       <Card.Grid style={gridStyle}>Content</Card.Grid>
-       <Card.Grid style={gridStyle}>Content</Card.Grid>
-       <Card.Grid style={gridStyle}>Content</Card.Grid>
-       <Card.Grid style={gridStyle}>Content</Card.Grid>
-       <Card.Grid style={gridStyle}>Content</Card.Grid>
-     </Card>
+        <Content
+          className="site-layout-background"
+          style={{
+            padding: 24,
+            margin: 0,
+            minHeight: 500,
+          }}
+        >
+           <Line {...config} chartRef={this.ref} />
         </Content>
         <Footer style={{ marginTop:"10px" ,textAlign: 'center' }}>Green Grocer App ©2020 Created by Ant UED</Footer>
       </Layout>
     </Layout>
   </Layout>
- )
+ );
 }
 }
