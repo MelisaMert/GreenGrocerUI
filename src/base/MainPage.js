@@ -2,23 +2,20 @@
 import React from 'react';
 import 'antd/dist/antd.css'
 import '../styles/main-page.css';
-import { Layout, Menu, Breadcrumb,Row,Col,Card, Tooltip } from 'antd';
-import { UserOutlined, LaptopOutlined, NotificationOutlined,ShoppingCartOutlined ,StockOutlined } from '@ant-design/icons';
+import { Layout, Menu, Breadcrumb} from 'antd';
+import { ShoppingCartOutlined ,StockOutlined } from '@ant-design/icons';
 import { Line } from '@ant-design/charts';
-import { Switch, Router } from 'react-router'
+import { BrowserRouter as Router, Route , Link}  from  'react-router-dom';
+import { Categories } from './Categories';
 import { Products } from './Products';
-
+import { Customers } from './Customers';
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
 
-export default class MainPage extends React.Component {
- state= {
-   collapsed: false
- };
- onCollapse = collapsed => {
-    console.log(collapsed);
-    this.setState({ collapsed });
-  };
+// const Product = ({match}) => {
+// return (<h1>Product Page {match.params.id}</h1>)
+// };
+export class MainPage extends React.Component {
  render() {
   const data = [
     { year: '1991', value: 3 },
@@ -41,19 +38,19 @@ export default class MainPage extends React.Component {
     yField: 'value',
   };
  return (
+  <Router>
   <Layout>
     <Header className="header">
       <div className="logo" />
       <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']}>
         <Menu.Item key="1">
-          Products
+         <Link to="/products">Products</Link> 
         </Menu.Item>
         <Menu.Item key="2">
-          Categories
+          <Link to= "/Categories">Categories </Link>
         </Menu.Item>
-        <Menu.Item key="3" 
-        className="customer">
-          Customers
+        <Menu.Item key="3" className="customer">
+          <Link to="/customers">Customers</Link>
         </Menu.Item>
       </Menu>
     </Header>
@@ -87,9 +84,6 @@ export default class MainPage extends React.Component {
       </Sider>
       <Layout style={{ padding: '0 24px 24px' }}>
         <Breadcrumb style={{ margin: '16px 0' }}>
-          {/* <Breadcrumb.Item>Home</Breadcrumb.Item>
-          <Breadcrumb.Item>List</Breadcrumb.Item>
-          <Breadcrumb.Item>App</Breadcrumb.Item> */}
         </Breadcrumb>
         <Content
           className="site-layout-background"
@@ -99,12 +93,20 @@ export default class MainPage extends React.Component {
             minHeight: 500,
           }}
         >
-           <Line {...config} chartRef={this.ref} />
+        <Route exact  strict path = "/" render ={
+            () => {
+                  return (<Line {...config} chartRef={this.ref} />);
+             } } />
+           <Route exact strict path = "/customers" component={Customers} />
+           <Route exact strict path = "/products" component={Products}/>
+           <Route exact strict path="/categories" component={Categories} />
+           {/* <Route exact  strict path = "/product/:id" component={Product}  /> */}
         </Content>
         <Footer style={{ marginTop:"10px" ,textAlign: 'center' }}>Green Grocer App ©2020 Created by Ant UED</Footer>
       </Layout>
     </Layout>
   </Layout>
+  </Router>
  );
 }
 }
