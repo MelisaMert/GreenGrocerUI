@@ -5,7 +5,7 @@ import '../styles/main-page.css';
 export class Categories extends React.Component {
     render() {
     return (
-        <p>Categories Page</p>
+        <p>CATEGORIES PAGE</p>
     );
    }
 }

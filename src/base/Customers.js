@@ -8,7 +8,7 @@ export class Customers extends React.Component {
     };
     render() {
     return (
-        <p>Customers Page</p>
+        <p>CUSTOMERS PAGE</p>
     );
    }
 }

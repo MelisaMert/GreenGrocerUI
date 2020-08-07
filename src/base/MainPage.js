@@ -1,21 +1,31 @@
 
 import React from 'react';
-import 'antd/dist/antd.css'
-import '../styles/main-page.css';
-import { Layout, Menu, Breadcrumb} from 'antd';
+import { GREEN_GROCER_LOGO } from '../data/image-url';
+import { Layout, Menu, Breadcrumb, Input, Row} from 'antd';
 import { ShoppingCartOutlined ,StockOutlined } from '@ant-design/icons';
-import { Line } from '@ant-design/charts';
 import { BrowserRouter as Router, Route , Link}  from  'react-router-dom';
-import { Categories } from './Categories';
+import { Categories } from './Categories';  
 import { Products } from './Products';
 import { Customers } from './Customers';
+import { Fruits } from './Fruits';
+import { Vagatables } from './Vagatables';
+import { Line } from '@ant-design/charts';
+import 'antd/dist/antd.css'
+import '../styles/main-page.css';
 const { Header, Content, Footer, Sider } = Layout;
-const { SubMenu } = Menu;
+const { Search } = Input;
 
-// const Product = ({match}) => {
-// return (<h1>Product Page {match.params.id}</h1>)
-// };
 export class MainPage extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      collapsed: false,
+    };
+  }
+  onCollapse=collapsed => {
+    console.log(collapsed);
+    this.setState({ collapsed });
+  };
  render() {
   const data = [
     { year: '1991', value: 3 },
@@ -37,49 +47,40 @@ export class MainPage extends React.Component {
     xField: 'year',
     yField: 'value',
   };
- return (
+  return (
   <Router>
   <Layout>
-    <Header className="header">
-      <div className="logo" />
-      <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']}>
+  <Header style={{ zIndex: 1, width: '100%' }}>
+      <div className="logo">
+         <img className="greengrocerimg" src={GREEN_GROCER_LOGO} />
+      </div>
+      <div className="container">
+      <Row>
+      <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['3']}>
         <Menu.Item key="1">
-         <Link to="/products">Products</Link> 
         </Menu.Item>
         <Menu.Item key="2">
-          <Link to= "/Categories">Categories </Link>
-        </Menu.Item>
-        <Menu.Item key="3" className="customer">
-          <Link to="/customers">Customers</Link>
-        </Menu.Item>
+          <div className="search">
+          <Search className="search-input" placeholder="  Search ..." onSearch={value => console.log(value)} enterButton />
+          </div>
+       </Menu.Item> 
+        <Menu.Item key = "3">
+      </Menu.Item>
       </Menu>
+      </Row>
+    </div>
     </Header>
-    <Layout>
-      <Sider width={200} className="site-layout-background">
+  <Layout>
+      <Sider collapsible collapsed={this.state.collapsed}  onCollapse={this.onCollapse} width={200} className="site-layout-background">
         <Menu
           mode="inline"
           defaultSelectedKeys={['1']}
           defaultOpenKeys={['sub1']}
           style={{ height: '100%', borderRight: 0 }}
         >
-          <SubMenu key="sub1" icon={<ShoppingCartOutlined />} title="Fruits">
-            <Menu.Item key="1">Fruits - 1</Menu.Item>
-            <Menu.Item key="2">Fruits - 2</Menu.Item>
-            <Menu.Item key="3">Fruits - 3</Menu.Item>
-            <Menu.Item key="4">Fruits - 4</Menu.Item>
-          </SubMenu>
-          <SubMenu key="sub2" icon={<ShoppingCartOutlined />} title="Vegetables">
-            <Menu.Item key="5">Vegetables - 1</Menu.Item>
-            <Menu.Item key="6">Vegatables - 2</Menu.Item>
-            <Menu.Item key="7">Vegatables - 3</Menu.Item>
-            <Menu.Item key="8">Vegatables - 4</Menu.Item>
-          </SubMenu>
-          <SubMenu key="sub3" icon={<StockOutlined />} title="Stocks">
-            <Menu.Item key="9">Stocks - 1</Menu.Item>
-            <Menu.Item key="10">Stocks - 2</Menu.Item>
-            <Menu.Item key="11">Stocks - 3</Menu.Item>
-            <Menu.Item key="12">Stocks - 4</Menu.Item>
-          </SubMenu>
+          <Menu.Item icon={<ShoppingCartOutlined />}><Link to="/fruits">Fruits</Link></Menu.Item>
+          <Menu.Item icon={<ShoppingCartOutlined />}><Link to="/vegatables">Vegatables</Link></Menu.Item>
+          <Menu.Item icon={<StockOutlined/> }>Stocks</Menu.Item>
         </Menu>
       </Sider>
       <Layout style={{ padding: '0 24px 24px' }}>
@@ -97,9 +98,11 @@ export class MainPage extends React.Component {
             () => {
                   return (<Line {...config} chartRef={this.ref} />);
              } } />
-           <Route exact strict path = "/customers" component={Customers} />
+           <Route exact strict path = "/customers" csomponent={Customers} />
            <Route exact strict path = "/products" component={Products}/>
            <Route exact strict path="/categories" component={Categories} />
+           <Route exact strict path="/fruits" component={Fruits} />
+           <Route exact strict path="/vegatables" component={Vagatables} />
            {/* <Route exact  strict path = "/product/:id" component={Product}  /> */}
         </Content>
         <Footer style={{ marginTop:"10px" ,textAlign: 'center' }}>Green Grocer App ©2020 Created by Ant UED</Footer>
