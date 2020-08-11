@@ -1,4 +1,5 @@
 export const GREEN_GROCER_LOGO = "https://pbs.twimg.com/profile_images/723825474481303552/9vGZ8myv.jpg";
+export const PAPER_BAG_IMAGE_SRC_URL = "https://n1.nextpng.com/sticker-png/26/505/sticker-png-plastic-bag-paper-shopping-bag-food-paper-bag-vegetable-grocery-store-healthy-diet.png";
 export const PINAAPPLE_IMAGE_SRC_URl =  "https://cdn.cimri.io/image/1000x1000/adetananas_231993609.jpg";
 export const GRAPE_IMAGE_SRC_URL = "https://reimg-carrefour.mncdn.com/mnresize/600/600/productimage/30097437/30097437_0_MC/8796988506162_1528879621690.jpg";
 export const PEACH_IMAGE_SRC_URL = "https://www.fidancilar.com/Uploads/UrunResimleri/buyuk/venus-tuysuz-seftali-fidani-nektarin-3-y-9706.png";

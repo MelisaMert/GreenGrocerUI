@@ -1,7 +1,8 @@
 
 import React from 'react';
-import { GREEN_GROCER_LOGO } from '../data/image-url';
-import { Layout, Menu, Breadcrumb, Input, Row} from 'antd';
+import { GREEN_GROCER_LOGO} from '../data/image-url';
+import { REGISTER_LOGIN_TEXT_ENGLISH } from '../data/constants';
+import { Layout, Menu, Breadcrumb, Input} from 'antd';
 import { ShoppingCartOutlined ,StockOutlined } from '@ant-design/icons';
 import { BrowserRouter as Router, Route , Link}  from  'react-router-dom';
 import { Categories } from './Categories';  
@@ -9,7 +10,9 @@ import { Products } from './Products';
 import { Customers } from './Customers';
 import { Fruits } from './Fruits';
 import { Vagatables } from './Vagatables';
-import { Line } from '@ant-design/charts';
+import { Register} from './Register';
+import { Dashboard} from './Dashboard';
+import { ShoppingBag } from './ShoppingBag';
 import 'antd/dist/antd.css'
 import '../styles/main-page.css';
 const { Header, Content, Footer, Sider } = Layout;
@@ -21,56 +24,34 @@ export class MainPage extends React.Component {
     this.state = {
       collapsed: false,
     };
+    this.getFooterContent = this.getFooterContent.bind(this);
   }
   onCollapse=collapsed => {
     console.log(collapsed);
     this.setState({ collapsed });
   };
- render() {
-  const data = [
-    { year: '1991', value: 3 },
-    { year: '1992', value: 4 },
-    { year: '1993', value: 3.5 },
-    { year: '1994', value: 5 },
-    { year: '1995', value: 4.9 },
-    { year: '1996', value: 6 },
-    { year: '1997', value: 7 },
-    { year: '1998', value: 9 },
-    { year: '1999', value: 13 },
-  ];
-  const config = {
-    data,
-    title: {
-      visible: true,
-      text: 'Green Grocer',
-    },
-    xField: 'year',
-    yField: 'value',
-  };
+  getFooterContent() {
+    return <span>Green Grocer App ©2020 Created by Ant UED</span>
+  }
+  render() {
   return (
   <Router>
   <Layout>
-  <Header style={{ zIndex: 1, width: '100%' }}>
-      <div className="logo">
-         <img className="greengrocerimg" src={GREEN_GROCER_LOGO} />
-      </div>
-      <div className="container">
-      <Row>
-      <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['3']}>
-        <Menu.Item key="1">
-        </Menu.Item>
-        <Menu.Item key="2">
-          <div className="search">
-          <Search className="search-input" placeholder="  Search ..." onSearch={value => console.log(value)} enterButton />
-          </div>
-       </Menu.Item> 
-        <Menu.Item key = "3">
-      </Menu.Item>
-      </Menu>
-      </Row>
-    </div>
+    <Header className="header">
+        <div className="logo">
+           <Link to="/dashboard"><img className="greengrocerimg" src={GREEN_GROCER_LOGO} /></Link>
+        </div>
+         <div>
+          <Search className="search" placeholder=" Search ..." onSearch={value => console.log(value)} enterButton />
+         </div>
+        <div className="div-register">
+           <span className="div-register-span"><Link to="/register" style={{color: "white"}}>{REGISTER_LOGIN_TEXT_ENGLISH}</Link></span>
+        </div>
+        <div className="div-shopping-bag-image">
+             <Link to="/shoppingbag"><ShoppingCartOutlined className="shopping-car-outlined"/></Link>
+        </div>
     </Header>
-  <Layout>
+   <Layout>
       <Sider collapsible collapsed={this.state.collapsed}  onCollapse={this.onCollapse} width={200} className="site-layout-background">
         <Menu
           mode="inline"
@@ -83,29 +64,23 @@ export class MainPage extends React.Component {
           <Menu.Item icon={<StockOutlined/> }>Stocks</Menu.Item>
         </Menu>
       </Sider>
-      <Layout style={{ padding: '0 24px 24px' }}>
-        <Breadcrumb style={{ margin: '16px 0' }}>
-        </Breadcrumb>
+      <Layout  className="layout">
+        <Breadcrumb className="breadcrumb" />
         <Content
           className="site-layout-background"
-          style={{
-            padding: 24,
-            margin: 0,
-            minHeight: 500,
-          }}
-        >
-        <Route exact  strict path = "/" render ={
-            () => {
-                  return (<Line {...config} chartRef={this.ref} />);
-             } } />
+          style={{ padding: 24, margin: 0, minHeight: 520 }}
+          > 
+           <Route exact strict path = "/" component={Dashboard}/>
+           <Route exact strict path = "/dashboard" component={Dashboard}/>
            <Route exact strict path = "/customers" csomponent={Customers} />
            <Route exact strict path = "/products" component={Products}/>
            <Route exact strict path="/categories" component={Categories} />
            <Route exact strict path="/fruits" component={Fruits} />
            <Route exact strict path="/vegatables" component={Vagatables} />
-           {/* <Route exact  strict path = "/product/:id" component={Product}  /> */}
+           <Route exact strict path="/register" component={Register}/>
+           <Route exact strict path="/shoppingbag" component={ShoppingBag} />
         </Content>
-        <Footer style={{ marginTop:"10px" ,textAlign: 'center' }}>Green Grocer App ©2020 Created by Ant UED</Footer>
+        <Footer className="footer">{this.getFooterContent()}</Footer>
       </Layout>
     </Layout>
   </Layout>
