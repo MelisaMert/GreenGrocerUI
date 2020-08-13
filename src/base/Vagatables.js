@@ -8,7 +8,7 @@ import { ARTICHOKE_IMAGE_SRC_URL, BROCCOLI_IMAGE_SRC_URL, PEPPER_IMAGE_SRC_URL, 
          GARDEN_ROCKET_IMAGE_SRC_URL , SQUASH_IMAGE_SRC_URL, ROMAINE_IMAGE_SRC_URL, TABOULI_IMAGE_SRC_URL  } from '../data/image-url';
 import { PINEAPPLE_PRODUCT_CONTENCT , GRAPE_PRODUCT_CONTENT, BANANA_PRODUCT_CONTENT, 
          KIWI_PRODUCT_CONTENT , MELON_PRODUCT_CONTENT, APPLE_PRODUCT_CONTENT } from '../data/product-content';
-
+import axios from 'axios';        
 const { Meta } = Card;
 
 export class Vagatables extends React.Component {
@@ -23,6 +23,12 @@ export class Vagatables extends React.Component {
         drawerProperty.title = value.title;
         drawerProperty.content = value.content;
         this.setState({drawer: true, drawerProperty})
+    }
+    componentDidMount(){
+      axios.get("https://jsonplaceholder.typicode.com/users")
+      .then(response => {
+          console.log('Response', response.data);
+      })
     }
     render() {
         return (
